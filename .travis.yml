@@ -15,23 +15,15 @@ script: "npm run $TEST_SUITE"
 env:
   - TEST_SUITE=test
   - TEST_SUITE=integration TEST_PRESET=./test/scripts/forgotten-rules.json
-  # - TEST_SUITE=integration TEST_PRESET=airbnb
-  # - TEST_SUITE=integration TEST_PRESET=grunt
-  # - TEST_SUITE=integration TEST_PRESET=mdcs
-  # - TEST_SUITE=integration TEST_PRESET=crockford
-  # - TEST_SUITE=integration TEST_PRESET=idiomatic
-  # - TEST_SUITE=integration TEST_PRESET=node-style-guide
-  # - TEST_SUITE=integration TEST_PRESET=google
-  # - TEST_SUITE=integration TEST_PRESET=jquery
-  # - TEST_SUITE=integration TEST_PRESET=wordpress
+  # - TEST_SUITE=integration TEST_PRESET=airbnb,grunt,mdcs
+  # - TEST_SUITE=integration TEST_PRESET=crockford,idiomatic,node-style-guide
+  # - TEST_SUITE=integration TEST_PRESET=google,jquery,wordpress
 
 matrix:
   include:
-    - node_js: 5
-      env:
-        - TEST_SUITE=coveralls
-        - TEST_SUITE=lint
-        - TEST_SUITE=integration TEST_PRESET=airbnb
+    - node_js: 5, env: TEST_SUITE=coveralls
+    - node_js: 5, env: TEST_SUITE=lint
+    - node_js: 5, env: TEST_SUITE=integration TEST_PRESET=airbnb,grunt,mdcs
 
 cache:
   directories:
