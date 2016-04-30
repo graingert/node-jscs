@@ -20,6 +20,7 @@ env:
   # - TEST_SUITE=integration TEST_PRESET=google,jquery,wordpress
 
 matrix:
+  fast_finish: true
   include:
     - node_js: 5
       env: TEST_SUITE=coveralls
