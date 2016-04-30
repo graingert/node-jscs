@@ -7,27 +7,30 @@ language: node_js
 node_js:
   - "5"
   - "4"
-  # - "0.12"
-  # - "0.10"
+  - "0.12"
+  - "0.10"
 
 script: "npm run $TEST_SUITE"
 
 env:
   - TEST_SUITE=test
-  - TEST_SUITE=integration TEST_PRESET=./test/scripts/forgotten-rules.json
-  # - TEST_SUITE=integration TEST_PRESET=airbnb,grunt,mdcs
-  # - TEST_SUITE=integration TEST_PRESET=crockford,idiomatic,node-style-guide
-  # - TEST_SUITE=integration TEST_PRESET=google,jquery,wordpress
+  - TEST_SUITE=integration TEST_PRESET=airbnb,google,jquery
 
 matrix:
   fast_finish: true
   include:
     - node_js: 5
-      env: TEST_SUITE=coveralls
-    - node_js: 5
       env: TEST_SUITE=lint
     - node_js: 5
-      env: TEST_SUITE=integration TEST_PRESET=airbnb,grunt,mdcs
+      env: TEST_SUITE=coveralls
+    - node_js: 0.10
+      env: TEST_SUITE=integration TEST_PRESET=./test/scripts/forgotten-rules.json
+    - node_js: 0.12
+      env: TEST_SUITE=integration TEST_PRESET=node-style-guide,wordpress
+    - node_js: 4
+      env: TEST_SUITE=integration TEST_PRESET=crockford,idiomatic
+    - node_js: 5
+      env: TEST_SUITE=integration TEST_PRESET=grunt,mdcs
 
 cache:
   directories:
