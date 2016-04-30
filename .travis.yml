@@ -5,33 +5,33 @@ sudo: false
 
 language: node_js
 node_js:
-  # - "0.10"
-  # - "0.12"
-  - "4"
   - "5"
+  - "4"
+  # - "0.12"
+  # - "0.10"
 
 script: "npm run $TEST_SUITE"
-matrix:
-  include:
-    - node_js: 5
-      env: TEST_SUITE=coveralls
-    - node_js: 5
-      env: TEST_SUITE=lint
-  allow_failures:
-    - env: TEST_SUITE=integration
 
 env:
   - TEST_SUITE=test
   - TEST_SUITE=integration TEST_PRESET=./test/scripts/forgotten-rules.json
-  - TEST_SUITE=integration TEST_PRESET=airbnb
+  # - TEST_SUITE=integration TEST_PRESET=airbnb
   # - TEST_SUITE=integration TEST_PRESET=grunt
   # - TEST_SUITE=integration TEST_PRESET=mdcs
   # - TEST_SUITE=integration TEST_PRESET=crockford
   # - TEST_SUITE=integration TEST_PRESET=idiomatic
-  - TEST_SUITE=integration TEST_PRESET=node-style-guide
-  - TEST_SUITE=integration TEST_PRESET=google
-  - TEST_SUITE=integration TEST_PRESET=jquery
-  - TEST_SUITE=integration TEST_PRESET=wordpress
+  # - TEST_SUITE=integration TEST_PRESET=node-style-guide
+  # - TEST_SUITE=integration TEST_PRESET=google
+  # - TEST_SUITE=integration TEST_PRESET=jquery
+  # - TEST_SUITE=integration TEST_PRESET=wordpress
+
+matrix:
+  include:
+    - node_js: 5
+      env:
+        - TEST_SUITE=coveralls
+        - TEST_SUITE=lint
+        - TEST_SUITE=integration TEST_PRESET=airbnb
 
 cache:
   directories:
