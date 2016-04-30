@@ -8,28 +8,26 @@ language: node_js
 script: "npm run $TEST_SUITE"
 env:
   - TEST_SUITE=test
-  - TEST_SUITE=integration TEST_PRESET=airbnb
-  - TEST_SUITE=integration TEST_PRESET=grunt
-  - TEST_SUITE=integration TEST_PRESET=mdcs
-  - TEST_SUITE=integration TEST_PRESET=crockford
-  - TEST_SUITE=integration TEST_PRESET=idiomatic
-  - TEST_SUITE=integration TEST_PRESET=node-style-guide
-  - TEST_SUITE=integration TEST_PRESET=google
-  - TEST_SUITE=integration TEST_PRESET=jquery
-  - TEST_SUITE=integration TEST_PRESET=wordpress
   - TEST_SUITE=integration TEST_PRESET=./test/scripts/forgotten-rules.json
+  # - TEST_SUITE=integration TEST_PRESET=airbnb
+  # - TEST_SUITE=integration TEST_PRESET=grunt
+  # - TEST_SUITE=integration TEST_PRESET=mdcs
+  # - TEST_SUITE=integration TEST_PRESET=crockford
+  # - TEST_SUITE=integration TEST_PRESET=idiomatic
+  # - TEST_SUITE=integration TEST_PRESET=node-style-guide
+  # - TEST_SUITE=integration TEST_PRESET=google
+  # - TEST_SUITE=integration TEST_PRESET=jquery
+  # - TEST_SUITE=integration TEST_PRESET=wordpress
+
+matrix:
+  include:
+    - node_js: 5
+      env: TEST_SUITE=coveralls
 
 cache:
   directories:
   - node_modules
 
 node_js:
-  - "0.10"
-  - "0.12"
   - "4"
   - "5"
-
-after_success:
-  - if [ "$TEST_SUITE" = "test" ] && node -p "process.exit(parseInt('$TRAVIS_NODE_VERSION', 10) !== 5)"; then
-      npm run coveralls;
-    fi
