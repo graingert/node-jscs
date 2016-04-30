@@ -10,7 +10,8 @@ var MOCHA = 'node_modules/.bin/mocha';
  * Applying every available preset to JSCS sources and tests, then executing tests.
  * So we can make sure nothing breaks during these reformatting actions.
  */
-vowFs.listDir('./presets')
+//
+(process.env.TEST_PRESET ? vow.resolve([process.env.TEST_PRESET]) : (vowFs.listDir('./presets')
     .then(function(presetFilenames) {
         var presets = presetFilenames.map(function(presetFilename) {
             return presetFilename.replace('.json', '');
@@ -19,6 +20,9 @@ vowFs.listDir('./presets')
         // List of rules that are not used in any of the default presets
         presets.unshift('./test/scripts/forgotten-rules.json');
 
+        return presets;
+    })))
+    .then(function(presets) {
         console.log('\n' + chalk.green('> ') + 'Autofix integration tests');
 
         return promiseQueue(presets, function(presetName) {
