@@ -21,9 +21,12 @@ env:
 
 matrix:
   include:
-    - node_js: 5, env: TEST_SUITE=coveralls
-    - node_js: 5, env: TEST_SUITE=lint
-    - node_js: 5, env: TEST_SUITE=integration TEST_PRESET=airbnb,grunt,mdcs
+    - node_js: 5
+      env: TEST_SUITE=coveralls
+    - node_js: 5
+      env: TEST_SUITE=lint
+    - node_js: 5
+      env: TEST_SUITE=integration TEST_PRESET=airbnb,grunt,mdcs
 
 cache:
   directories:
